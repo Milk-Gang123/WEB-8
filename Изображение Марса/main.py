@@ -74,6 +74,37 @@ def show_promotion_image():
                 </html>'''
 
 
+@app.route('/choice/<planet_name>')
+def show_choice(planet_name):
+    return f'''<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <link rel="stylesheet" type="text/css"
+                        href="{url_for('static', filename="css/style.css")}">
+                    <!-- Bootstrap CSS -->
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+                    <title>Варианты выбора</title>
+                </head>
+                <body>
+                <h2 color="black">Мое предложение: {planet_name}<h2>
+                <h3>Эта планета близка к Земле;</h3>
+                <div class="alert alert-primary" role="alert">
+                  На ней много необходимых ресурсов;
+                </div>
+                <div class="alert alert-secondary" role="alert">
+                  На ней есть вода и атмосфера;
+                </div>
+                <div class="alert alert-success" role="alert">
+                  На ней есть небольшое магнитное поле;
+                </div>
+                <div class="alert alert-danger" role="alert">
+                  Наконец, она просто красива!
+                </div>
+                </body>
+                </html>'''
+
+
 @app.route('/astronaut_selection', methods=['POST', 'GET'])
 def show_form():
     if request.method == 'GET':
