@@ -89,16 +89,16 @@ def show_choice(planet_name):
                 <body>
                 <h2 color="black">Мое предложение: {planet_name}<h2>
                 <h3>Эта планета близка к Земле;</h3>
-                <div class="alert alert-primary" role="alert">
+                <div class="alert alert-primary" role="alert" style= "font-size:30px">
                   На ней много необходимых ресурсов;
                 </div>
-                <div class="alert alert-secondary" role="alert">
+                <div class="alert alert-secondary" role="alert" style= "font-size:30px">
                   На ней есть вода и атмосфера;
                 </div>
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-success" role="alert" style= "font-size:30px">
                   На ней есть небольшое магнитное поле;
                 </div>
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger" role="alert" style= "font-size:30px">
                   Наконец, она просто красива!
                 </div>
                 </body>
