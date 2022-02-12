@@ -1,4 +1,4 @@
-from flask import Flask, url_for, request
+from flask import Flask, url_for, request, render_template
 
 app = Flask(__name__)
 
@@ -254,6 +254,13 @@ def show_form():
         print(request.form['about'])
         print(request.form['accept'])
         return "Форма отправлена"
+
+
+@app.route('/results/<nickname>/<int:level>/<float:rating>')
+def results(nickname, level, rating):
+    params = {"nickname": nickname, "level": level, "rating": rating}
+    return  render_template('results.html', **params)
+
 
 
 if __name__ == "__main__":
