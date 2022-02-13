@@ -1,6 +1,11 @@
-from flask import Flask, url_for, request, render_template
+import os
 
+from flask import Flask, url_for, request, render_template
+from PIL import Image
 app = Flask(__name__)
+image_path = 'static/img/image_from_task7.jpg'
+image = Image.open('static/img/image_from_task7_copy.jpg')
+image.save('static/img/image_from_task7.jpg')
 
 
 @app.route('/')
@@ -232,7 +237,7 @@ def show_form():
                                         <input type="checkbox" class="form-check-input" id="acceptRules" name="accept">
                                         <label class="form-check-label" for="acceptRules">Готовы остаться на Марсе?</label>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Записаться</button>
+                                    <button type="submit" class="btn btn-primary">Отправить</button>
                                 </form>
                             </div>
                           </body>
@@ -260,6 +265,26 @@ def show_form():
 def results(nickname, level, rating):
     params = {"nickname": nickname, "level": level, "rating": rating}
     return  render_template('results.html', **params)
+
+
+
+@app.route('/load_photo', methods=['POST', 'GET'])
+def show_photo():
+    global image_path
+    if request.method == 'GET':
+        params = {'filename': image_path}
+        return f'''{render_template('photo.html', **params)}'''
+
+    elif request.method == 'POST':
+        filename = request.form['file']
+        pth = 'C:\\'
+        for root, dirnames, filenames in os.walk(pth):
+            for file in filenames:
+                if file == filename:
+                    path = os.path.join(root, file)
+                    image = Image.open(path)
+                    image.save('static/img/image_from_task7.jpg')
+                    return f'''Форма успешно отправлена. Перейдите на предыдущую страницу и обновите ее, чтобы увидеть фото'''
 
 
 
