@@ -9,5 +9,16 @@ def base(title):
     return render_template('base.html', **params)
 
 
+@app.route('/training/<prof>')
+def training(prof):
+    if 'инженер' in prof or 'строитель' in prof:
+        prof = 'True'
+    else:
+        prof = 'False'
+    params = {'prof': prof}
+    return render_template('training.html', **params)
+
+
+
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")
