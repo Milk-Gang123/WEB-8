@@ -1,5 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+
 app = Flask(__name__)
+
+FORM_DATA = {'surname': '', 'name': '', 'edu': '', 'prof': [],
+             'gender': '', 'motiv': '', 'ready': ''}
+PROFESSIONS = ['инженер-исследователь', 'пилот', 'строитель', 'экзобиолог', 'врач',
+                   'инженер по терраформированию', 'климатолог',
+                   'специалист по радиационной защите', 'астрогеолог', 'гляциолог',
+                   'инженер жизнеобеспечения', 'метеоролог', 'оператор марсохода', 'киберинженер',
+                   'штурман', 'пилот дронов']
 
 
 @app.route('/<title>')
@@ -21,14 +30,41 @@ def training(prof):
 
 @app.route('/list_prof/<list>')
 def list_prof(list):
-    professions = ['инженер-исследователь', 'пилот', 'строитель', 'экзобиолог', 'врач',
-                   'инженер по терраформированию', 'климатолог',
-                   'специалист по радиационной защите', 'астрогеолог', 'гляциолог',
-                   'инженер жизнеобеспечения', 'метеоролог', 'оператор марсохода', 'киберинженер',
-                   'штурман', 'пилот дронов']
-    params = {'list': list, 'profs': professions}
+    params = {'list': list, 'profs': PROFESSIONS}
     return render_template('list_prof.html', **params)
 
+
+@app.route('/astronaut_selection', methods=['POST', 'GET'])
+def show_form():
+    global FORM_DATA
+    if request.method == 'GET':
+        return render_template('form.html')
+    elif request.method == 'POST':
+        FORM_DATA["surname"] = request.form['surname']
+        FORM_DATA["name"] = request.form['name']
+        #FORM_DATA["email"] = request.form['email']
+        FORM_DATA["edu"] = request.form['class']
+        profs = []
+        for i in range(1, 16):
+            try:
+                a = request.form[f'prof{i}']
+                profs.append(a)
+            except Exception:
+                pass
+        FORM_DATA["prof"] = profs
+        FORM_DATA["gender"] = request.form['sex']
+        FORM_DATA["motiv"] = request.form['about']
+        FORM_DATA["ready"] = request.form['accept']
+        print(FORM_DATA)
+        return "Форма отправлена"
+
+
+@app.route('/answer')
+@app.route('/auto_answer')
+def show_answer():
+    params = FORM_DATA
+    params['prof'] = ', '.join(params['prof'])
+    return render_template('auto_answer.html', **params)
 
 
 if __name__ == "__main__":
