@@ -71,5 +71,14 @@ def show_answer():
     return render_template('auto_answer.html', **params)
 
 
+@app.route('/login', methods=['POST', 'GET'])
+def show_login_form():
+    params = {'title': 'Аварийный доступ'}
+    if request.method == 'GET':
+        return render_template('login.html', **params)
+    elif request.method == 'POST':
+        return "Доступ получен"
+
+
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")
