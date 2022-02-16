@@ -2,8 +2,8 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-FORM_DATA = {'surname': '', 'name': '', 'edu': '', 'prof': [],
-             'gender': '', 'motiv': '', 'ready': ''}
+FORM_DATA = {'surname': 'Watny', 'name': 'Mark', 'edu': 'выше среднего', 'prof': ['штурман марсохода'],
+             'gender': 'male', 'motiv': 'Всегда мечтал застрять а Марсе!', 'ready': 'True'}
 PROFESSIONS = ['инженер-исследователь', 'пилот', 'строитель', 'экзобиолог', 'врач',
                    'инженер по терраформированию', 'климатолог',
                    'специалист по радиационной защите', 'астрогеолог', 'гляциолог',
@@ -54,7 +54,11 @@ def show_form():
         FORM_DATA["prof"] = profs
         FORM_DATA["gender"] = request.form['sex']
         FORM_DATA["motiv"] = request.form['about']
-        FORM_DATA["ready"] = request.form['accept']
+        a = request.form['accept']
+        if a == 'on':
+            FORM_DATA["ready"] = 'True'
+        else:
+            FORM_DATA["ready"] = 'False'
         print(FORM_DATA)
         return "Форма отправлена"
 
