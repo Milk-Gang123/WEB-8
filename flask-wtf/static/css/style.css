@@ -11,6 +11,9 @@ p {
     font-weight: 0;
     color: black;
    }
+li {
+    font-size: 22pt;
+}
 h4 {
     margin: 1em;
     color: gray;
