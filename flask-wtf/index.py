@@ -80,10 +80,17 @@ def show_login_form():
     elif request.method == 'POST':
         return "Доступ получен"
 
+
 @app.route('/distribution')
 def show_dist():
     params = {'members': MEMBERS}
     return render_template('distribution.html', **params)
+
+
+@app.route('/table/<gender>/<int:age>')
+def show_table(gender, age):
+    params = {'gender': gender, 'age': age}
+    return render_template('table.html', **params)
 
 
 

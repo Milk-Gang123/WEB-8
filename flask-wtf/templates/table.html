@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Оформление каюты</h1>
+<table>
+    <tr>
+        <td width="500px" height="100px">Цвет стен</td>
+        <td width="500px" height="100px">Эмблема</td>
+    </tr>
+    <tr>
+        {% if gender == "male" and age < 21 %}
+            <td bgcolor="00BFFF" width="500px" height="600px"></td>
+            <td width="500px" height="600px"><img src="/static//img/alien_2.jpg"></td>
+        {% endif %}
+    </tr>
+</table>
+
+{% endblock %}
